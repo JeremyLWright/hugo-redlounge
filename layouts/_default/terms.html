@@ -1,0 +1,30 @@
+{{ partial "header.html" . }}
+<body>
+	{{ if .Params.totop }}
+		<div id="nav-to-top">
+			<span class="decorative-marker">//</span><a href="#top">To Top</a>
+		</div>
+	{{ end }}
+
+	<div id="layout" class="pure-g">
+    {{ partial "sidebar.html" . }}
+	
+	{{ if .Params.banner }}
+	<div class="content-banner-image pure-u-1 pure-u-md-3-4" style="{{ if .Params.bannerheight }}height: {{ .Params.bannerheight }}px;{{ end }}">
+		<img src="{{ .Params.banner }}" class="pure-img" style="{{ if .Params.bannerfill }}width: 100%;{{ end }}" />
+	</div>
+	{{ end }}
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+    <h1 id="title">{{ .Title }}</h1>
+
+    <ul>
+    {{ $data := .Data }}
+    {{ range $key, $value := .Data.Terms }}
+      <li><a href="{{ $key | urlize }}">{{ $key }}</a> ({{ len $value }} Articles)</li>
+    {{ end }}
+   </ul>
+  {{ partial "bodyend.html" . }}
+</body>
+</html>
+
